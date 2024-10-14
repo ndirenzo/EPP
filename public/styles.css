@@ -1,0 +1,164 @@
+body {
+    font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+
+}
+
+h1 {
+    text-align: center;
+    padding: 20px;
+    color: #333;
+}
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}
+td {
+    color: #333;
+}
+#logoutButton {
+    display: block;
+    margin: 0; /* Elimina el margen */
+    padding: 5px; /* Reduce el padding */
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%; /* Hacer el botón redondo */
+    cursor: pointer;
+    font-size: 24px; /* Aumentar el tamaño del ícono */
+    width: 40px; /* Ajusta el ancho */
+    height: 40px; /* Ajusta la altura */
+}
+
+#logoutButton .material-icons {
+    font-size: 24px; /* Ajusta el tamaño del ícono */
+    vertical-align: middle; /* Centra el ícono */
+}
+
+#showTableButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #02c93d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+    width: 200px;
+}
+
+#logoutButton:hover {
+    background-color: #d32f2f;
+}
+
+#showTableButton:hover {
+    background-color: #048d27;
+}
+
+
+/* Estilo básico para el botón */
+.btn {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 12px 20px; /* Espaciado interno */
+    text-align: center; /* Centrar texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Para permitir el espaciado */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px 2px; /* Espaciado alrededor */
+    cursor: pointer; /* Cambiar cursor al pasar por encima */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
+}
+
+.btn:hover {
+    background-color: #45a049; /* Cambiar color al pasar por encima */
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+}
+
+.btn:active {
+    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
+}
+
+#workersTable {
+    display: block;
+    max-height: 400px; /* Puedes ajustar la altura máxima */
+    overflow-y: scroll;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo alternativo para filas pares */
+}
+
+tr:hover {
+    background-color: #ddd; /* Color de fondo al pasar el mouse */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
+    animation: fadeIn 1s; /* Aplicar la animación al cargar la página */
+}

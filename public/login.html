@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login con Google</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4285F4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        .error {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <button id="loginGoogleBtn">Iniciar sesión con Google</button>
+        <p class="error" id="errorMessage"></p>
+    </div>
+
+    <script type="module">
+        // Importar Firebase desde CDN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLqPKNtCK4cO93Zn1Yiik89OyRWYFif0U",
+            authDomain: "detector-de-epp.firebaseapp.com",
+            projectId: "detector-de-epp",
+            storageBucket: "detector-de-epp.appspot.com",
+            messagingSenderId: "427537022126",
+            appId: "1:427537022126:web:139e07f28006ad73f2413f"
+        };
+
+        // Inicializa Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
+
+        // Referencias a elementos HTML
+        const loginGoogleBtn = document.getElementById("loginGoogleBtn");
+        const errorMessage = document.getElementById("errorMessage");
+
+        // Función de inicio de sesión con Google
+        loginGoogleBtn.addEventListener("click", async () => {
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                console.log("Usuario autenticado:", user);
+                // Usuario autenticado, redirigir a la página principal
+                window.location.href = "index.html";  // Redirige a la página de datos
+            } catch (error) {
+                console.error("Error al iniciar sesión con Google", error);
+                errorMessage.textContent = "Error: " + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

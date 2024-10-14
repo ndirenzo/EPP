@@ -1,0 +1,68 @@
+[
+    {
+        "name": "Hardhat",
+        "class": 0,
+        "confidence": 1.0,
+        "box": {
+            "x1": 0.0,
+            "y1": 0.0,
+            "x2": 41.6,
+            "y2": 6.4
+        }
+    },
+    {
+        "name": "vehicle",
+        "class": 9,
+        "confidence": 1.0,
+        "box": {
+            "x1": 0.0,
+            "y1": 0.0,
+            "x2": 48.0,
+            "y2": 6.4
+        }
+    },
+    {
+        "name": "vehicle",
+        "class": 9,
+        "confidence": 1.0,
+        "box": {
+            "x1": 22.4,
+            "y1": 0.0,
+            "x2": 60.8,
+            "y2": 6.4
+        }
+    },
+    {
+        "name": "Safety Vest",
+        "class": 7,
+        "confidence": 1.0,
+        "box": {
+            "x1": 16.0,
+            "y1": 0.0,
+            "x2": 67.2,
+            "y2": 19.2
+        }
+    },
+    {
+        "name": "Hardhat",
+        "class": 0,
+        "confidence": 1.0,
+        "box": {
+            "x1": 9.6,
+            "y1": 0.0,
+            "x2": 73.6,
+            "y2": 19.2
+        }
+    },
+    {
+        "name": "Hardhat",
+        "class": 0,
+        "confidence": 1.0,
+        "box": {
+            "x1": 22.4,
+            "y1": 0.0,
+            "x2": 86.4,
+            "y2": 19.2
+        }
+    }
+]
