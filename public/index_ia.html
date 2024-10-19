@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Seguridad Industrial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #4a148c;
+            color: white;
+        }
+        header {
+            background-color: #7c43bd;
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-buttons button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        .nav-buttons button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        main {
+            padding: 2rem 0;
+        }
+        .hero {
+            background-color: white;
+            color: #4a148c;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        .card {
+            background-color: #7c43bd;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .status-icon {
+            font-size: 1.2rem;
+        }
+        .green { color: #4caf50; }
+        .red { color: #f44336; }
+        .worker-image {
+            width: 100%;
+            height: 200px;
+            background-color: #5e35b1;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Sistema de Seguridad Industrial</div>
+                <div class="nav-buttons">
+                    <button onclick="alert('Mostrar lista de usuarios')">Usuarios</button>
+                    <button onclick="alert('Mostrar logs recientes')">Logs</button>
+                    <button onclick="alert('Apertura manual activada')" style="background-color: #f44336;">Apertura manual</button>
+                    <button onclick="alert('Sesión cerrada')">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="hero">
+                <h1>Monitoreo de Seguridad en Tiempo Real</h1>
+                <p>Trabajador actual:</p>
+                <p><strong>Nombre: </strong><span id="worker-name">Juan</span></p>
+                <p><strong>Apellido: </strong><span id="worker-surname">Pérez</span></p>
+                <p><strong>CardUID: </strong><span id="worker-carduid">1234567890</span></p>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h2>Estado del Trabajador</h2>
+                    <table id="worker-status">
+                        <tr>
+                            <th>RFID</th>
+                            <td><span class="status-icon" id="rfid-status">❌</span></td>
+                        </tr>
+                        <tr>
+                            <th>EPP</th>
+                            <td><span class="status-icon" id="epp-status">❌</span></td>
+                        </tr>
+                        <tr>
+                            <th>Molinete</th>
+                            <td><span class="status-icon" id="molinete-status">❌</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2>Cumplimiento de EPP</h2>
+                    <div class="worker-image">👷</div>
+                    <table id="ppe-status">
+                        <tr>
+                            <th>Casco</th>
+                            <td><span class="status-icon" id="helmet-status">❌</span></td>
+                        </tr>
+                        <tr>
+                            <th>Guantes</th>
+                            <td><span class="status-icon" id="gloves-status">❌</span></td>
+                        </tr>
+                        <tr>
+                            <th>Botas</th>
+                            <td><span class="status-icon" id="boots-status">❌</span></td>
+                        </tr>
+                        <tr>
+                            <th>Chaleco</th>
+                            <td><span class="status-icon" id="vest-status">❌</span></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card">
+                    <h2>Registros Recientes</h2>
+                    <table id="recent-logs">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Detección</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Los registros se agregarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        const names = ["Juan", "María", "Carlos", "Ana", "Luis", "Elena", "Pedro", "Sofía"];
+        const surnames = ["Pérez", "González", "Rodríguez", "López", "Martínez", "Sánchez", "Fernández", "García"];
+
+        function generateCardUID() {
+            return Math.floor(Math.random() * 10000000000).toString().padStart(10, '0');
+        }
+
+        function updateWorkerInfo() {
+            document.getElementById('worker-name').textContent = names[Math.floor(Math.random() * names.length)];
+            document.getElementById('worker-surname').textContent = surnames[Math.floor(Math.random() * surnames.length)];
+            document.getElementById('worker-carduid').textContent = generateCardUID();
+        }
+
+        function updateData() {
+            // Actualizar información del trabajador
+            updateWorkerInfo();
+
+            // Actualizar estado del trabajador
+            document.getElementById('rfid-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+            document.getElementById('epp-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+            document.getElementById('molinete-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+
+            // Actualizar estado de EPP
+            document.getElementById('helmet-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+            document.getElementById('gloves-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+            document.getElementById('boots-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+            document.getElementById('vest-status').textContent = Math.random() < 0.5 ? '✅' : '❌';
+
+            // Actualizar registros recientes
+            const recentLogs = document.getElementById('recent-logs').getElementsByTagName('tbody')[0];
+            const newLog = recentLogs.insertRow(0);
+            newLog.innerHTML = `
+                <td>${names[Math.floor(Math.random() * names.length)]}</td>
+                <td>${surnames[Math.floor(Math.random() * surnames.length)]}</td>
+                <td>${Math.random() < 0.5 ? '✅' : '❌'}</td>
+                <td>${new Date().toLocaleString()}</td>
+            `;
+
+            // Mantener solo los últimos 5 registros
+            while (recentLogs.rows.length > 5) {
+                recentLogs.deleteRow(-1);
+            }
+        }
+
+        // Actualizar datos cada 5 segundos
+        setInterval(updateData, 5000);
+
+        // Actualización inicial
+        updateData();
+    </script>
+</body>
+</html>
