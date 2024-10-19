@@ -1,24 +1,34 @@
 import torch
 import cv2
 from ultralytics import YOLO
-import base64
-import io
-from PIL import Image
 
 # Cargar el modelo
-modelo = YOLO('best.pt')
+modelo = YOLO('best.pt')  # Asegúrate de que 'best.pt' esté en la ruta correcta.
 
 # Captura de video
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)  # 0 para la cámara predeterminada
 
-# Leer un solo frame de la cámara
-ret, frame = cap.read()
-if ret:
-    detect = modelo(frame)
-    frame_box = detect[0].plot()
+while True:
+    # Leer un frame de la cámara
+    ret, frame = cap.read()
+    
+    if not ret:
+        print("No se puede capturar el video")
+        break
 
-    # Guardar la imagen en un archivo
-    cv2.imwrite('public/image.jpg', frame_box)
+    # Realizar la detección
+    results = modelo(frame)
 
-# Liberar la cámara
+    # Dibujar las boxes en el frame
+    frame_box = results[0].plot()
+
+    # Mostrar el frame con las detecciones
+    cv2.imshow('Detección de Objetos', frame_box)
+
+    # Salir del bucle si se presiona la tecla 'q'
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Liberar la cámara y cerrar todas las ventanas
 cap.release()
+cv2.destroyAllWindows()
