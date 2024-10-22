@@ -3,58 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datos de Workers</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>SafeWear - Sistema de Seguridad Industrial</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'); /* Fuente similar al logo */
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Fondo blanco */
+            color: #333333; /* Texto gris oscuro */
+        }
+        header {
+            background-color: #2C8A5A; /* Fondo verde más oscuro */
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white; /* Texto blanco */
+        }
+        .slogan {
+            font-size: 1rem;
+            color: white; /* Texto blanco */
+            margin-left: 1rem;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem; /* Espaciado entre los botones */
+        }
+        .nav-buttons button {
+            font-family: 'Poppins', sans-serif; /* Tipografía del lema */
+            background-color: white; /* Fondo blanco */
+            color: #2C8A5A; /* Texto en verde */
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px; /* Bordes redondeados */
+            cursor: pointer;
+        }
+        .nav-buttons button:hover {
+            background-color: rgba(44, 138, 90, 0.1); /* Color de fondo al pasar el ratón */
+        }
+        main {
+            padding: 2rem 0;
+        }
+        h1, h2 {
+            margin-bottom: 1rem;
+            color: #2C8A5A; /* Títulos en verde más oscuro */
+        }
+        .btn {
+            background-color: #2C8A5A; /* Botón verde más oscuro */
+            color: white; /* Texto blanco */
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #228B4D; /* Verde más oscuro al pasar el ratón */
+        }
+        .search-box {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #2C8A5A; /* Borde verde más oscuro */
+            margin-bottom: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #ffffff; /* Fondo blanco de la tabla */
+            color: #333333; /* Texto gris oscuro */
+            border-radius: 8px;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(44, 138, 90, 0.1); /* Líneas divisorias verdes más oscuras */
+        }
+        .status-icon {
+            font-size: 1.2rem;
+        }
+        .green {
+            color: #2C8A5A; /* Verde más oscuro para íconos */
+        }
+        .red {
+            color: #f44336;
+        }
+    </style>
 </head>
 <body>
-    <h1>Datos de Workers</h1>
-    <button id="showTableButton" class="btn">Mostrar Lista de Usuarios</button>
-    <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido" class="search-box">
-    
-    <!-- Nuevo bloque para mostrar el ID más reciente -->
-    <div id="latestIdBlock">
-        <h2>Última lectura RFID:</h2>
-        <table id="latestReadTable">
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <!-- Bloque para logo + lema -->
+                <div class="logo-container">
+                    <div class="logo">SafeWear</div>
+                    <div class="slogan">Tu seguridad, nuestra prioridad</div>
+                </div>
+                <div class="nav-buttons">
+                    <button onclick="alert('Mostrar lista de usuarios')">Usuarios</button>
+                    <button onclick="alert('Mostrar logs recientes')">Logs</button>
+                    <button onclick="alert('Sesión cerrada')">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Datos de Workers</h1>
+        <button id="showTableButton" class="btn">Mostrar Lista de Usuarios</button>
+        <input type="text" id="searchInput" placeholder="Buscar por nombre o apellido" class="search-box">
+        
+        <!-- Nuevo bloque para mostrar el ID más reciente -->
+        <div id="latestIdBlock" class="hero">
+            <h2>Última lectura RFID:</h2>
+            <table id="latestReadTable">
+                <thead>
+                    <tr>
+                        <th>ID Tarjeta</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Área</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="latestId">Esperando tarjeta...</td>
+                        <td id="latestName">-</td>
+                        <td id="latestLastname">-</td>
+                        <td id="latestArea">-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table id="workersTable" style="display: none;">
             <thead>
                 <tr>
-                    <th>ID Tarjeta dea</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
-                    <th>Area</th>
+                    <th>Card UID</th>
+                    <th>Área</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td id="latestId">Esperando tarjeta...</td>
-                    <td id="latestName">-</td>
-                    <td id="latestLastname">-</td>
-                    <td id="latestArea">-</td>
-                </tr>
-            </tbody>
+            <tbody id="workersList"></tbody>
         </table>
-    </div>
+        <div id="paginationControls" class="pagination"></div>
 
-    <table id="workersTable" style="display: none;">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Card UID</th>
-                <th>Área</th>
-            </tr>
-        </thead>
-        <tbody id="workersList"></tbody>
-    </table>
-    <div id="paginationControls" class="pagination"></div>
+        <div id="logoutButtonContainer" style="position: absolute; top: 20px; right: 20px;">
+            <button id="logoutButton" class="btn">
+                <span class="material-icons">logout</span>
+            </button>
+        </div>
+    </main>
 
-    <div id="logoutButtonContainer" style="position: absolute; top: 20px; right: 20px;">
-        <button id="logoutButton" class="btn">
-            <span class="material-icons">logout</span>
-        </button>
-    </div>
-
-    <script type="module"  src="script.js"> </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
