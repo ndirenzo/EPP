@@ -124,10 +124,15 @@ document.getElementById('download-csv').addEventListener('click', async () => {
         });
 
         // Crear un enlace de descarga
+        const now = new Date();
+        const options = { timeZone: 'America/Argentina/Buenos_Aires', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedDate = now.toLocaleString('es-AR', options).replace(/[/]/g, '-').replace(/:/g, '-'); // Formato: DD-MM-YYYY_HH-MM-SS
+        const filename = `workers_report_${formattedDate}.csv`; // Nombre del archivo
         const encodedUri = encodeURI(csvContent);
         const link = document.createElement("a");
         link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "workers_report.csv");
+        link.setAttribute("download", filename); // Usar el nuevo nombre con fecha y hora
+       
         document.body.appendChild(link);
         link.click();  // Dispara la descarga
     } catch (error) {
