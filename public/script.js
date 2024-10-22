@@ -56,6 +56,14 @@ async function updateLatestRead(id) {
     const latestLastnameElement = document.getElementById('latestLastname');
     const latestAreaElement = document.getElementById('latestArea');
 
+    if (!id) {
+        latestIdElement.textContent = "Esperando tarjeta...";
+        latestNameElement.textContent = "-";
+        latestLastnameElement.textContent = "-";
+        latestAreaElement.textContent = "-";
+        return;
+    }
+
     latestIdElement.textContent = id;
     
     try {
@@ -67,9 +75,9 @@ async function updateLatestRead(id) {
         
         if (!querySnapshot.empty) {
             const workerData = querySnapshot.docs[0].data();
-            latestNameElement.textContent = workerData.name || '-';
-            latestLastnameElement.textContent = workerData.lastname || '-';
-            latestAreaElement.textContent = workerData.area || '-';
+            latestNameElement.textContent = workerData.name || 'No encontrado';
+            latestLastnameElement.textContent = workerData.lastname || 'No encontrado';
+            latestAreaElement.textContent = workerData.area || 'No encontrado';
         } else {
             latestNameElement.textContent = 'No encontrado';
             latestLastnameElement.textContent = 'No encontrado';
@@ -83,17 +91,24 @@ async function updateLatestRead(id) {
     }
 }
 
+
 // Escuchar lecturas de Firestore en la colección readings_rfid
 const lecturasRef = collection(db, 'readings_rfid');
-onSnapshot(lecturasRef, (snapshot) => {
-    snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-            const newReading = change.doc.data();
-            updateLatestRead(newReading.id);
-        }
-    });
-});
+let initialLoad = true;
 
+onSnapshot(lecturasRef, (snapshot) => {
+    if (initialLoad) {
+        updateLatestRead(null);  // Esto mostrará "Esperando tarjeta..." al cargar la página
+        initialLoad = false;
+    } else {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                const newReading = change.doc.data();
+                updateLatestRead(newReading.id);
+            }
+        });
+    }
+});
 document.getElementById('download-csv').addEventListener('click', async () => {
     try {
         const workersRef = collection(db, 'workers'); // Referencia a la colección workers

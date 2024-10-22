@@ -99,3 +99,15 @@
         .red {
             color: #f44336;
         }
+        #latestReadTable {
+            width: 100%;
+            table-layout: fixed;
+        }
+        
+        #latestReadTable th,
+        #latestReadTable td {
+            width: 25%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
