@@ -1,164 +1,101 @@
-body {
-    font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'); /* Fuente similar al logo */
 
-}
-
-h1 {
-    text-align: center;
-    padding: 20px;
-    color: #333;
-}
-.container {
-    width: 90%;
-    margin: 0 auto;
-}
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-th {
-    background-color: #4CAF50;
-    color: white;
-}
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-tr:hover {
-    background-color: #ddd;
-}
-td {
-    color: #333;
-}
-#logoutButton {
-    display: block;
-    margin: 0; /* Elimina el margen */
-    padding: 5px; /* Reduce el padding */
-    background-color: #f44336;
-    color: white;
-    border: none;
-    border-radius: 50%; /* Hacer el botón redondo */
-    cursor: pointer;
-    font-size: 24px; /* Aumentar el tamaño del ícono */
-    width: 40px; /* Ajusta el ancho */
-    height: 40px; /* Ajusta la altura */
-}
-
-#logoutButton .material-icons {
-    font-size: 24px; /* Ajusta el tamaño del ícono */
-    vertical-align: middle; /* Centra el ícono */
-}
-
-#showTableButton {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #02c93d;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    width: 200px;
-}
-
-#logoutButton:hover {
-    background-color: #d32f2f;
-}
-
-#showTableButton:hover {
-    background-color: #048d27;
-}
-
-
-/* Estilo básico para el botón */
-.btn {
-    background-color: #4CAF50; /* Color de fondo */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    padding: 12px 20px; /* Espaciado interno */
-    text-align: center; /* Centrar texto */
-    text-decoration: none; /* Sin subrayado */
-    display: inline-block; /* Para permitir el espaciado */
-    font-size: 16px; /* Tamaño de fuente */
-    margin: 4px 2px; /* Espaciado alrededor */
-    cursor: pointer; /* Cambiar cursor al pasar por encima */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    transition: background-color 0.3s, transform 0.3s; /* Transiciones suaves */
-}
-
-.btn:hover {
-    background-color: #45a049; /* Cambiar color al pasar por encima */
-    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
-}
-
-.btn:active {
-    transform: scale(0.95); /* Reducir ligeramente el tamaño al hacer clic */
-}
-
-#workersTable {
-    display: block;
-    max-height: 400px; /* Puedes ajustar la altura máxima */
-    overflow-y: scroll;
-    width: 100%;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:hover {
-    background-color: #ddd;
-}
-
-th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
-}
-
-.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo alternativo para filas pares */
-}
-
-tr:hover {
-    background-color: #ddd; /* Color de fondo al pasar el mouse */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-body {
-    font-family: 'Roboto', sans-serif; /* Aplicar la fuente Roboto */
-    animation: fadeIn 1s; /* Aplicar la animación al cargar la página */
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* Fondo blanco */
+            color: #333333; /* Texto gris oscuro */
+        }
+        header {
+            background-color: #2C8A5A; /* Fondo verde más oscuro */
+            padding: 1rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white; /* Texto blanco */
+        }
+        .slogan {
+            font-size: 1rem;
+            color: white; /* Texto blanco */
+            margin-left: 1rem;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 0.5rem; /* Espaciado entre los botones */
+        }
+        .nav-buttons button {
+            font-family: 'Poppins', sans-serif; /* Tipografía del lema */
+            background-color: white; /* Fondo blanco */
+            color: #2C8A5A; /* Texto en verde */
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 10px; /* Bordes redondeados */
+            cursor: pointer;
+        }
+        .nav-buttons button:hover {
+            background-color: #9ff1c2; /* Color de fondo al pasar el ratón */
+        }
+        main {
+            padding: 2rem 0;
+        }
+        h1, h2 {
+            margin-bottom: 1rem;
+            color: #2C8A5A; /* Títulos en verde más oscuro */
+        }
+        .btn {
+            background-color: #2C8A5A; /* Botón verde más oscuro */
+            color: white; /* Texto blanco */
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #5fb884; /* Verde más oscuro al pasar el ratón */
+        }
+        .search-box {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid #2C8A5A; /* Borde verde más oscuro */
+            margin-bottom: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background-color: #ffffff; /* Fondo blanco de la tabla */
+            color: #333333; /* Texto gris oscuro */
+            border-radius: 8px;
+        }
+        th, td {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(44, 138, 90, 0.1); /* Líneas divisorias verdes más oscuras */
+        }
+        .status-icon {
+            font-size: 1.2rem;
+        }
+        .green {
+            color: #2C8A5A; /* Verde más oscuro para íconos */
+        }
+        .red {
+            color: #f44336;
+        }

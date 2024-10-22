@@ -48,114 +48,6 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-let currentPage = 1;
-const rowsPerPage = 5;
-
-// Cargar datos de la colección "workers"
-async function loadWorkers() {
-    const list = document.getElementById("workersList");
-    const workersCollection = collection(db, "workers");
-    const querySnapshot = await getDocs(workersCollection);
-    
-    // Limpiar la lista anterior
-    list.innerHTML = '';
-    
-    // Iterar sobre cada trabajador
-    for (const doc of querySnapshot.docs) {
-        const data = doc.data();
-        
-        // Crear el elemento de fila
-        const listItem = document.createElement("tr");
-        listItem.innerHTML = `<td>${data.name}</td><td>${data.lastname}</td><td>${data.carduid}</td><td>${data.area}</td>`;
-        list.appendChild(listItem);
-    }
-    displayPage(1); // Mostrar la primera página después de cargar los datos
-}
-
-// Mostrar solo las filas de la página actual
-function displayPage(page) {
-    const rows = document.querySelectorAll("#workersTable tbody tr");
-    const totalRows = rows.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage);
-
-    // Validar que la página esté dentro de los límites
-    if (page < 1) page = 1;
-    if (page > totalPages) page = totalPages;
-
-    currentPage = page;
-
-    // Ocultar todas las filas
-    rows.forEach((row, index) => {
-        row.style.display = "none"; // Ocultar todas las filas por defecto
-        if (index >= (page - 1) * rowsPerPage && index < page * rowsPerPage) {
-            row.style.display = ""; // Mostrar solo las filas de la página actual
-        }
-    });
-
-    // Actualizar los controles de paginación
-    displayPaginationControls(totalPages);
-}
-
-function displayPaginationControls(totalPages) {
-    const paginationControls = document.getElementById("paginationControls");
-    paginationControls.innerHTML = "";
-
-    if (currentPage > 1) {
-        const prevButton = document.createElement("button");
-        prevButton.innerText = "Anterior";
-        prevButton.addEventListener("click", () => displayPage(currentPage - 1));
-        paginationControls.appendChild(prevButton);
-    }
-
-    for (let i = 1; i <= totalPages; i++) {
-        const pageButton = document.createElement("button");
-        pageButton.innerText = i;
-        pageButton.addEventListener("click", () => displayPage(i));
-        if (i === currentPage) {
-            pageButton.classList.add("active");
-        }
-        paginationControls.appendChild(pageButton);
-    }
-
-    if (currentPage < totalPages) {
-        const nextButton = document.createElement("button");
-        nextButton.innerText = "Siguiente";
-        nextButton.addEventListener("click", () => displayPage(currentPage + 1));
-        paginationControls.appendChild(nextButton);
-    }
-}
-
-document.getElementById("searchInput").addEventListener("input", filterWorkers);
-
-function filterWorkers() {
-    const searchInput = document.getElementById("searchInput").value.toLowerCase();
-    const rows = document.querySelectorAll("#workersTable tbody tr");
-
-    rows.forEach(row => {
-        const name = row.cells[0].innerText.toLowerCase();
-        const lastname = row.cells[1].innerText.toLowerCase();
-        const cardUID = row.cells[2].innerText.toLowerCase();
-        const area = row.cells[3].innerText.toLowerCase();
-
-        if (name.includes(searchInput) || lastname.includes(searchInput) || cardUID.includes(searchInput) || area.includes(searchInput)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    });
-}
-
-// Manejador del clic en el botón para mostrar/ocultar la tabla
-document.getElementById("showTableButton").addEventListener("click", () => {
-    const table = document.getElementById("workersTable");
-    if (table.style.display === "none") {
-        table.style.display = "table"; // Mostrar la tabla
-        document.getElementById("showTableButton").innerText = "Ocultar Lista de Usuarios"; // Cambiar texto del botón
-    } else {
-        table.style.display = "none"; // Ocultar la tabla
-        document.getElementById("showTableButton").innerText = "Mostrar Lista de Usuarios"; // Cambiar texto del botón
-    }
-});
 
 // Función para actualizar el ID más reciente
 async function updateLatestRead(id) {
@@ -200,4 +92,30 @@ onSnapshot(lecturasRef, (snapshot) => {
             updateLatestRead(newReading.id);
         }
     });
+});
+
+document.getElementById('download-csv').addEventListener('click', async () => {
+    try {
+        const workersRef = collection(db, 'workers'); // Referencia a la colección workers
+        const querySnapshot = await getDocs(workersRef); // Obtener los documentos
+
+        // Crea el contenido del CSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        csvContent += "ID,Nombre,Apellido,UID,Área\n";  // Encabezado del CSV
+
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            csvContent += `${doc.id},${data.name},${data.lastname},${data.carduid},${data.area}\n`;  // Reemplaza según tus campos
+        });
+
+        // Crear un enlace de descarga
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "workers_report.csv");
+        document.body.appendChild(link);
+        link.click();  // Dispara la descarga
+    } catch (error) {
+        console.error("Error al obtener los datos de Firestore:", error);
+    }
 });
