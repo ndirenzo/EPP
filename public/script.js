@@ -91,7 +91,16 @@ async function updateLatestRead(id) {
     }
 }
 
-
+function updateEPPStatus(data) {
+    const cascoIcon = document.getElementById('casco-icon');
+    const mascaraIcon = document.getElementById('mascara-icon');
+    const chalecoIcon = document.getElementById('chaleco-icon');
+    
+    // Actualizar clases basadas en los valores
+    cascoIcon.classList.toggle('active', data.casco === 1);
+    mascaraIcon.classList.toggle('active', data.mascara === 1);
+    chalecoIcon.classList.toggle('active', data.chaleco === 1);
+}
 // Escuchar lecturas de Firestore en la colección readings_rfid
 const lecturasRef = collection(db, 'readings_rfid');
 let initialLoad = true;
@@ -105,6 +114,7 @@ onSnapshot(lecturasRef, (snapshot) => {
             if (change.type === "added") {
                 const newReading = change.doc.data();
                 updateLatestRead(newReading.id);
+                updateEPPStatus(newReading);
             }
         });
     }

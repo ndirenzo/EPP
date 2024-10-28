@@ -111,3 +111,73 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+
+        /* Agregar estos estilos a tu archivo CSS */
+.epp-status-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.epp-status-container h2 {
+    color: #2C8A5A;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.epp-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.worker-icon {
+    flex-shrink: 0;
+}
+
+.epp-items {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.epp-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.epp-icon {
+    width: 48px;
+    height: 48px;
+    color: #cccccc; /* Color por defecto (gris) */
+    transition: color 0.3s ease;
+}
+
+.epp-icon.active {
+    color: #2C8A5A; /* Color cuando está activo */
+}
+
+#casco-icon.active {
+    color: #F59E0B; /* Amarillo para el casco */
+}
+
+#mascara-icon.active {
+    color: #3B82F6; /* Azul para la máscara */
+}
+
+#chaleco-icon.active {
+    color: #10B981; /* Verde para el chaleco */
+}
+
+.epp-item span {
+    font-size: 0.9rem;
+    color: #333333;
+    font-weight: 500;
+}
